@@ -11,8 +11,8 @@ printf "[*] Performing ping sweep on "$network_address"/"$cidr"\n"
 host_count=1
 
 # iterate through the number of network bits set on the CIDR
-# subtracts 16 to only include the bits for class C addresses
-for i in $(seq 1 $(($cidr-16))); do host_count=$(($host_count * 2)); done;
+# subtract cidr from 32 to figure out number of bits used for hosts
+for i in $(seq 1 $((32-$cidr))); do host_count=$(($host_count * 2)); done;
 
 printf "[-] Total # of hosts: "$host_count"\n"
 start=1
